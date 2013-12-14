@@ -13,8 +13,7 @@
 
 Route::get('/', array('as' => 'home', function()
 {
-	var_dump(App::environment());
-	// return View::make('home.index');
+	return View::make('home.index');
 }));
 
 //Temporarily disable Sentry Throttling for now
