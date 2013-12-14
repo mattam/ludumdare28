@@ -6,11 +6,11 @@ class DiceUser extends Eloquent {
 
 	public function users()
     {
-        return $this->belongsToMany('App\Models\Users');
+        return $this->belongsToMany('User');
     }
 
     public function dices()
     {
-        return $this->belongsToMany('App\Models\Dices');
+        return $this->belongsToMany('Dice');
     }
 }

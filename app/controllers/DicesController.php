@@ -1,5 +1,4 @@
 <?php
-
 class DicesController extends BaseController {
 
 	/**
@@ -146,16 +145,16 @@ class DicesController extends BaseController {
 	}
 
 	/**
-	 * Return off of the user's dice
+	 * Return all of the user's dice(s)
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function getDices()
 	{
-		$user = Sentry::getUser();
+		$user = User::find(Sentry::getUser()->id);
 
-		$dices = $this->dice->all();
+		$dices = $user->dices;
 
 		return View::make('game.index', compact('dices'));
 	}

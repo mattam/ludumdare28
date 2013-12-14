@@ -9,6 +9,6 @@ class Dice extends Eloquent {
 
 	public function users()
     {
-        return $this->belongsToMany('App\Models\Users');
+        return $this->belongsToMany('User');
     }
 }

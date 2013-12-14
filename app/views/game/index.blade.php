@@ -6,7 +6,8 @@
 
 @section('content')
 <h3>Game</h3>
-
-
+@foreach ($dices as $dice)
+	{{$dice->rolled}}
+@endforeach
 
 @stop
