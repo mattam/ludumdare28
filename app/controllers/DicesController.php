@@ -3,14 +3,27 @@
 class DicesController extends BaseController {
 
 	/**
+	 * Dice Repository
+	 *
+	 * @var Dice
+	 */
+	protected $dice;
+
+	public function __construct(Dice $dice)
+	{
+		$this->dice = $dice;
+	}
+
+	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-        return View::make('dices.index')
-        ->with('dices', Dice::all());
+		$dices = $this->dice->all();
+
+		return View::make('dices.index', compact('dices'));
 	}
 
 	/**
@@ -20,7 +33,7 @@ class DicesController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('dices.create');
+		return View::make('dices.create');
 	}
 
 	/**
@@ -30,7 +43,20 @@ class DicesController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		$validation = Validator::make($input, Dice::$rules);
+
+		if ($validation->passes())
+		{
+			$this->dice->create($input);
+
+			return Redirect::route('dices.index');
+		}
+
+		return Redirect::route('dices.create')
+			->withInput()
+			->withErrors($validation)
+			->with('message', 'There were validation errors.');
 	}
 
 	/**
@@ -41,7 +67,9 @@ class DicesController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('dices.show');
+		$dice = $this->dice->findOrFail($id);
+
+		return View::make('dices.show', compact('dice'));
 	}
 
 	/**
@@ -52,7 +80,14 @@ class DicesController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('dices.edit');
+		$dice = $this->dice->find($id);
+
+		if (is_null($dice))
+		{
+			return Redirect::route('dices.index');
+		}
+
+		return View::make('dices.edit', compact('dice'));
 	}
 
 	/**
@@ -63,7 +98,21 @@ class DicesController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = array_except(Input::all(), '_method');
+		$validation = Validator::make($input, Dice::$rules);
+
+		if ($validation->passes())
+		{
+			$dice = $this->dice->find($id);
+			$dice->update($input);
+
+			return Redirect::route('dices.show', $id);
+		}
+
+		return Redirect::route('dices.edit', $id)
+			->withInput()
+			->withErrors($validation)
+			->with('message', 'There were validation errors.');
 	}
 
 	/**
@@ -74,7 +123,9 @@ class DicesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$this->dice->find($id)->delete();
+
+		return Redirect::route('dices.index');
 	}
 
 }

@@ -22,7 +22,7 @@
  
                 if ($user)
                 {
-                    return Redirect::to('/');
+                    return Redirect::to('/')->with('success', 'You are logged in');
                 }
             }
             catch(\Exception $e)
@@ -35,7 +35,7 @@
         {
             Sentry::logout();
  
-            return Redirect::to('/');
+            return Redirect::to('/')->with('success', 'You are logged out');
         }
 
 

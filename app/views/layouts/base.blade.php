@@ -17,6 +17,7 @@
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
                 @if (Sentry::check())
+                    <li><a href="{{ URL::route('dices.index') }}"><i></i> Dices</a></li>
                     <li><a href="{{ URL::route('auth.logout') }}"><i></i> Logout</a></li>
                 @else
                     <li><a href="{{ URL::route('auth.login') }}"><i></i> Login</a></li>
