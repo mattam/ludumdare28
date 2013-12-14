@@ -36,7 +36,7 @@ Route::group(array('before' => 'sentry'), function()
 Route::resource('dices', 'DicesController');
 Route::get('dices/{id}/roll', 'DicesController@roll');	
 Route::get('game', array('as'=>'game', 'uses'=>'DicesController@getDices'));
-Route::get('addDice', 'DicesController@addDice');
+Route::post('addDice', array('as'=>'addDice', 'uses'=>'DicesController@addDice'));
 Route::post('rollAll', array('as'=>'rollAll', 'uses'=>'DicesController@rollAll'));
 });
 

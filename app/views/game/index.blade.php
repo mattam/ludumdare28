@@ -12,6 +12,10 @@
 	<img src="/images/{{$dice->rolled}}.png" width="100"/>
 @endforeach
 
+{{ Form::open(array('route' => 'addDice')) }}
+			{{ Form::submit('Add Dice', array('class' => 'btn btn-info')) }}
+{{ Form::close() }}
+
 {{ Form::open(array('route' => 'rollAll')) }}
 			{{ Form::submit('Roll All Dice', array('class' => 'btn btn-info')) }}
 {{ Form::close() }}

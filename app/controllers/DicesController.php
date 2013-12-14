@@ -188,7 +188,7 @@ class DicesController extends BaseController {
 	 */
 	public function addDice()
 	{
-		$user = Sentry::getUser();
+		$user = User::find(Sentry::getUser()->id);
 		// $input = ['rolled' => 1];
 		// $this->dice->create($input);
 		$dice = new Dice;
@@ -198,7 +198,9 @@ class DicesController extends BaseController {
 		$diceuser = DiceUser::create(array('dice_id' => $dice->id, 'user_id' => $user->id));
 
 
-		return Redirect::route('dices.index');
+		$dices = $user->dices;
+		$total = $user->dices()->sum('rolled');
+		return View::make('game.index', compact('dices', 'total'));
 
 	}
 
