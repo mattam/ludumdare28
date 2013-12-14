@@ -15,3 +15,4 @@ Route::get('/', function()
 {
 	return View::make('home.index');
 });
+Route::resource('dices', 'DicesController');
