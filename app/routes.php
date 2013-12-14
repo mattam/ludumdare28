@@ -32,7 +32,10 @@ Route::post('auth/register',  array('as' => 'auth.register.post',  'uses' => 'Ap
 
 Route::group(array('before' => 'sentry'), function()
 {
+
 Route::resource('dices', 'DicesController');
+Route::get('dices/{id}/roll', 'DicesController@roll');	
+
 });
 
 

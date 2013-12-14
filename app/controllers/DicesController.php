@@ -128,4 +128,21 @@ class DicesController extends BaseController {
 		return Redirect::route('dices.index');
 	}
 
+	/**
+	 * Roll the specified dice, storing a random value betwen 1..6.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function roll($id)
+	{
+
+		$input = ['rolled' => rand(1, 6)];
+
+		$dice = $this->dice->find($id);
+		$dice->update($input);
+
+		return Redirect::route('dices.show', $id);
+	}
+
 }
