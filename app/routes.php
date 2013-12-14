@@ -37,6 +37,7 @@ Route::resource('dices', 'DicesController');
 Route::get('dices/{id}/roll', 'DicesController@roll');	
 Route::get('game', array('as'=>'game', 'uses'=>'DicesController@getDices'));
 Route::get('addDice', 'DicesController@addDice');
+Route::post('rollAll', array('as'=>'rollAll', 'uses'=>'DicesController@rollAll'));
 });
 
 

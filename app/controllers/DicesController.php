@@ -145,6 +145,28 @@ class DicesController extends BaseController {
 	}
 
 	/**
+	 * Rolls all the user's dices, storing a random value betwen 1..6.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function rollAll()
+	{
+		$user = User::find(Sentry::getUser()->id);
+
+		$dices = $user->dices;
+
+		foreach ($dices as $dice)
+		{
+			$input = ['rolled' => rand(1, 6)];
+			$dice = $this->dice->find($dice->id);
+			$dice->update($input);
+		}
+		$total = $user->dices()->sum('rolled');
+		return Redirect::route('game', compact('dices', 'total'));
+	}
+
+	/**
 	 * Return all of the user's dice(s)
 	 *
 	 * @param  int  $id
@@ -155,8 +177,8 @@ class DicesController extends BaseController {
 		$user = User::find(Sentry::getUser()->id);
 
 		$dices = $user->dices;
-
-		return View::make('game.index', compact('dices'));
+		$total = $user->dices()->sum('rolled');
+		return View::make('game.index', compact('dices', 'total'));
 	}
 
 	/**
