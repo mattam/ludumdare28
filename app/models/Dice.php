@@ -6,4 +6,9 @@ class Dice extends Eloquent {
 	public static $rules = array(
 		'rolled' => 'required'
 	);
+
+	public function users()
+    {
+        return $this->belongsToMany('App\Models\Users');
+    }
 }

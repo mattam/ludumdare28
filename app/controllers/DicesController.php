@@ -145,4 +145,40 @@ class DicesController extends BaseController {
 		return Redirect::route('dices.show', $id);
 	}
 
+	/**
+	 * Return off of the user's dice
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function getDices()
+	{
+		$user = Sentry::getUser();
+
+		$dices = $this->dice->all();
+
+		return View::make('game.index', compact('dices'));
+	}
+
+	/**
+	 * Add dice for this user
+	 *
+	 * @return Response
+	 */
+	public function addDice()
+	{
+		$user = Sentry::getUser();
+		// $input = ['rolled' => 1];
+		// $this->dice->create($input);
+		$dice = new Dice;
+		$dice->rolled = 1;
+		$dice->save();
+
+		$diceuser = DiceUser::create(array('dice_id' => $dice->id, 'user_id' => $user->id));
+
+
+		return Redirect::route('dices.index');
+
+	}
+
 }
