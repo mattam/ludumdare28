@@ -7,7 +7,7 @@
 @section('content')
 <h3>Game</h3>
 @foreach ($dices as $dice)
-	{{$dice->rolled}}
+	<img src="/images/{{$dice->rolled}}.png" width="100"/>
 @endforeach
 
 @stop
