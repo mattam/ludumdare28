@@ -94,7 +94,7 @@
                 $valid_login = Sentry::authenticate($credentials, false);
                         if ($valid_login)
                         {
-                            return Redirect::to('home')->with('success', 'Congratulations, your account has been successfully created!');
+                            return Redirect::to('/')->with('success', 'Congratulations, your account has been successfully created!');
                         }
                         else
                         {
