@@ -19,7 +19,6 @@ class CreateDicesTable extends Migration {
 		});
 	}
 
-
 	/**
 	 * Reverse the migrations.
 	 *

@@ -21,6 +21,7 @@
 	                <li><a href="/">Home</a></li>
 	                @if (Sentry::check())
 	                	<li><a href="{{ URL::route('game') }}"><i></i> Game</a></li>
+	                	<li><a href="{{ URL::route('banks.index') }}"><i></i> Bank</a></li>
 	                	<li><a href="{{ URL::route('dices.index') }}"><i></i> Dices</a></li>
 	                    <li><a href="{{ URL::route('auth.logout') }}"><i></i> Logout</a></li>
 	                @else

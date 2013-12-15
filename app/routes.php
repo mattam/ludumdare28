@@ -38,6 +38,7 @@ Route::get('dices/{id}/roll', 'DicesController@roll');
 Route::get('game', array('as'=>'game', 'uses'=>'DicesController@getDices'));
 Route::post('addDice', array('as'=>'addDice', 'uses'=>'DicesController@addDice'));
 Route::post('rollAll', array('as'=>'rollAll', 'uses'=>'DicesController@rollAll'));
+Route::resource('banks', 'BanksController');
 });
 
 
@@ -50,3 +51,4 @@ Route::filter('sentry', function()
 {
 	if (!Sentry::check()) return Redirect::to('auth/login');
 });
+

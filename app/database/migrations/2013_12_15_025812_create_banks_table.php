@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class PivotDiceUserTable extends Migration {
+class CreateBanksTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,13 @@ class PivotDiceUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('dice_user', function(Blueprint $table) {
+		Schema::create('banks', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('dice_id')->unsigned()->index();
-			$table->integer('user_id')->unsigned()->index();
+			$table->integer('dice_id');
+			$table->integer('user_id');
 			$table->timestamps();
 		});
 	}
-
 
 
 	/**
@@ -29,7 +28,7 @@ class PivotDiceUserTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('dice_user');
+		Schema::drop('banks');
 	}
 
 }
